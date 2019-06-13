@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const validateRegisterInput = require("../validation/register");
 const validateLoginInput = require("../validation/login");
+const config = require("../config/keys");
 
 const User = require("../models/User");
 
@@ -76,9 +77,8 @@ router.post("/login", (req, res) => {
 				};
 				jwt.sign(
 					payload,
-					"secret",
+					config.cookieKey,
 					{
-						// TÄÄ MYÖS CONFIGIIIN!!!!
 						expiresIn: 3600
 					},
 					(err, token) => {
@@ -96,7 +96,6 @@ router.post("/login", (req, res) => {
 				return res.status(400).json(errors);
 			}
 		});
-		return res.status(400).json(errors);
 	});
 });
 

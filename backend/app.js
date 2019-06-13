@@ -2,10 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-const config = require("./db");
+const config = require("./config/keys");
 const users = require("./routes/user");
 
-mongoose.connect(config.DB, { useNewUrlParser: true }).then(
+mongoose.connect(config.mongoURI, { useNewUrlParser: true }).then(
 	() => {
 		console.log("Database is connected");
 	},
